@@ -86,11 +86,13 @@ def star_mapping2(infile, outfile):
          r"star_first.dir/resume_star_stats.txt")
 def computeStarstats(infile, outfile):
     job_memory = "2G"
-    script_path = os.path.join("/shared/sudlab1/General/projects/covid_mirna/src/pipeline_mirrnaseq",
+    script_path = os.path.join(os.path.join((os.path.dirname(__file__)),
                                "Rscripts",
-                               "computeStarStats.R")
+                               "computeStarStats.R"))
+    out_path = os.path.join(os.path.join((os.path.dirname(__file__)),
+                               P.snip(outfile,"/resume_star_stats.txt")))
     statement = '''
-    Rscript %(script_path)s
+    Rscript %(script_path)s -o %(out_path)s
     '''
     P.run(statement)
 

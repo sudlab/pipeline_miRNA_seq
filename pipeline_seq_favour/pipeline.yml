@@ -12,7 +12,7 @@ star1:
     genome: /shared/sudlab1/General/mirror/genomes/STAR/hg38_noalt_mirna_junc93_1.dir
     #outFilterMultimapNmax
     max_multi: 10
-    outFilterMatchNmin
+    #outFilterMatchNmin
     min_length_match: 16
     #outFilterMatchNmin
     max_mismatch: 1
@@ -26,7 +26,7 @@ star2:
     genome: /shared/sudlab1/General/mirror/genomes/STAR/hg38_noalt_junc93_49.dir
     #outFilterMultimapNmax
     max_multi: 10
-    outFilterMatchNmin
+    #outFilterMatchNmin
     min_length_match: 16
     #outFilterMatchNmin
     max_mismatch: 999
