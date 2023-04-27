@@ -1,0 +1,36 @@
+
+
+###First round STAR mapping parameters###
+#See star manual
+#Default ENCODE parameters for miRseq
+    # --outFilterMultimapScoreRange 0
+    # --outFilterScoreMinOverLread 0
+    # --outFilterMatchNminOverLread 0
+    # --outFilterMismatchNoverLmax 0.05
+    # --alignSJDBoverhangMin 1000
+star1:
+    genome: /shared/sudlab1/General/mirror/genomes/STAR/hg38_noalt_mirna_junc93_1.dir
+    #outFilterMultimapNmax
+    max_multi: 10
+    outFilterMatchNmin
+    min_length_match: 16
+    #outFilterMatchNmin
+    max_mismatch: 1
+    #outFilterMismatchNoverLmax
+    mis_cover: 0.1
+    #alignEndsType
+    type: EndToEnd
+
+
+star2:
+    genome: /shared/sudlab1/General/mirror/genomes/STAR/hg38_noalt_junc93_49.dir
+    #outFilterMultimapNmax
+    max_multi: 10
+    outFilterMatchNmin
+    min_length_match: 16
+    #outFilterMatchNmin
+    max_mismatch: 999
+    #outFilterMismatchNoverLmax
+    mis_cover: 0.2
+    #alignEndsType
+    type: Local
