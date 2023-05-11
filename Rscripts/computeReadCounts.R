@@ -19,7 +19,7 @@ the_pattern <- paste0("counts",str_extract(arguments$output, "MultiFrac|Multi|Pr
 data_names_files = list.files(pattern=the_pattern, recursive = TRUE)
 data_names <- str_remove_all(data_names_files, pattern = "trimmed-")
 data_names <- str_remove(data_names, pattern = "_counts[:alpha:]+.txt")
-data_names <- str_remove(data_names, pattern = "counts.dir/")
+data_names <- str_remove(data_names, pattern = "counts.+.dir/")
 data_samples <- lapply(data_names_files, read.table, header = T)
 names(data_samples) <- data_names
 
@@ -41,7 +41,9 @@ resume_data <- as.matrix(resume_data)
 ##PCA an dsample dist with deseq
 #Sample table for deseq
 samples <- data.frame(samples = colnames(resume_data), 
-                      condition = str_extract(colnames(resume_data), regex("H|C|A")))
+                      condition = str_extract(colnames(resume_data), regex("OE|CTRL")),
+                      day = str_extract(colnames(resume_data), regex("D.")),
+                      replicate = str_extract(colnames(resume_data), regex("..Unmapped|.$")))
 samples$condition <- factor(samples$condition)
 
 dds <- try(DESeqDataSetFromMatrix(resume_data,

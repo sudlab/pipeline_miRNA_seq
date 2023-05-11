@@ -1,6 +1,6 @@
 library("tidyverse")
-library("limma")
-library(DESeq2)
+#library("limma")
+#library(DESeq2)
 library("RColorBrewer")
 library("optparse")
 option_list = list(
@@ -11,8 +11,8 @@ option_list = list(
 )
 arguments <- parse_args(OptionParser(option_list = option_list))
 
-#arguments <- data.frame(out_path = "star_first.dir/MultiFrac_resume_counts.txt")
-setwd(out_path)
+#arguments <- data.frame(out_path = "star_first.dir")
+setwd(arguments$out_path)
 data_names_files = list.files(pattern=".Log.final.out$")
 data_names <- str_remove_all(data_names_files, pattern = "trimmed-")
 data_names <- str_remove(data_names, pattern = ".Log.final.out")
