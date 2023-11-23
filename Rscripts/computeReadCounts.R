@@ -12,8 +12,8 @@ option_list = list(
 )
 arguments <- parse_args(OptionParser(option_list = option_list))
 
-# arguments <- data.frame(output = "counts.dir/MultiFrac_resume_counts.txt")
-# setwd("/mnt/sharc/fastdata/bo1cv/covid_mirna/star_mirgen/")
+# arguments <- data.frame(output = "counts_first.dir/Primary_resume_counts.txt")
+# setwd("/mnt/sharc/shared/sudlab1/General/projects/Favour_EKT/pipeline_seq_favour/counts_first.dir/")
 
 the_pattern <- paste0("counts",str_extract(arguments$output, "MultiFrac|Multi|Primary|Overlap|Unique"),".txt$")
 data_names_files = list.files(pattern=the_pattern, recursive = TRUE)
@@ -31,6 +31,12 @@ colnames(resume_data)[7:ncol(resume_data)] <- data_names
 resume_data <- resume_data %>%
   group_by(Geneid) %>%
   summarise_at(colnames(resume_data)[7:ncol(resume_data)] , sum)
+
+#Due to GTF from miRBase
+if (str_detect(resume_data$Geneid[1], "transcript")) {
+  resume_data <- resume_data %>%
+    mutate(Geneid = str_remove_all(Geneid,"transcript:"))
+}
 
 #Filter at least one read
 resume_data <- resume_data[rowSums(resume_data[2:ncol(resume_data)]) >= 1,]

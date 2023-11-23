@@ -36,4 +36,4 @@ star2:
     type: Local
 
 #featureCounts options
-gtf_gff: /shared/sudlab1/General/annotations/hg38_noalt_ensembl93/mirbase.dir/miRNA_non_primary_transcripts.gff3
+gtf_gff: /shared/sudlab1/General/annotations/hg38_noalt_ensembl93/mirbase.dir/miRNA_non_primary_transcripts_featureCounts.gtf

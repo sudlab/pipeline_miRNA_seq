@@ -124,6 +124,8 @@ def featureCountsPrimary(infile, outfile):
     '''featureCounts'''
     statement="""
     featureCounts -a %(anno)s
+    -t miRNA
+    -g Alias
     -T 4
     --primary
     -O  --fracOverlap 0.8
