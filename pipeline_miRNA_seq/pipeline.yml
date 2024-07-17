@@ -1,0 +1,28 @@
+
+
+###STAR mapping parameters###
+#See star manual
+#Default ENCODE parameters for miRseq
+    # --outFilterMultimapScoreRange 0
+    # --outFilterScoreMinOverLread 0
+    # --outFilterMatchNminOverLread 0
+    # --outFilterMismatchNoverLmax 0.05
+    # --alignSJDBoverhangMin 1000
+
+star:
+  genome: $SCRATCH/public/mirror/genomes/STAR/mm_GRCm39_50.dir
+  #outFilterMultimapNmax
+  max_multi: 10
+  #outFilterMatchNmin
+  min_length_match: 16
+  #outFilterMatchNmin
+  max_mismatch: 1
+  #outFilterMismatchNoverLmax
+  mis_cover: 0.1
+  #alignEndsType
+  type: EndToEnd
+
+###featureCounts options###
+featurecounts:
+  gtf_gff: $SCRATCH/public/annotations/hg38_noalt_ensembl93/mirbase.dir/miRNA_non_primary_transcripts_featureCounts.gtf
+  options: -O  --fracOverlap 0.8
