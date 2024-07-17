@@ -1,7 +1,9 @@
 # pipeline_miRNA_seq
 
 This pipeline performs miRNAseq mapping with STAR and counts mapped reads to
-a reference genome.
+STAR reference genome using STAR --quantmode TranscriptomeSAM GeneCounts as well 
+counts mapped reads using featureCounts if a more specific GTF annotation file wants 
+to be  used.
 
 
 ## Requirements
@@ -9,10 +11,10 @@ a reference genome.
 On top of the default CGAT setup, the pipeline requires the following.
 
 Software:
-    python (v3.8.12 with pysam v0.17.0 when built)
-    STAR ()
-    featurecounts
-    multiqc
+    python (v3.8.12 with pysam v0.17.0 when built)  
+    STAR (v2.7)
+    featurecounts (v2.0.1)
+    multiqc (v1.11)
 
 
 ## Configuration
@@ -40,3 +42,7 @@ Run the pipeline with python [path_to_repo]/pipeline_miRNA_seq.py make full -v5.
 
 
 ## Ouputs
+
+- star.dir directory with STAR outputs,
+- counts.dir directory with featureCounts outputs
+- multiqc outputs for both STAR and featureCounts
