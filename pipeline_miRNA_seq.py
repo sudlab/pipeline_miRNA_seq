@@ -61,27 +61,28 @@ def multiQCstar(infile, outfile):
     """Run multiqc on star mapping"""
     job_memory = "2G"
     statement = '''
-    "export LANG=en_GB.UTF-8 && "
-    "export LC_ALL=en_GB.UTF-8 && "
-	"multiqc -f -n %(outfile)s --no-data-dir star.dir/ "
+    export LANG=en_GB.UTF-8 && 
+    export LC_ALL=en_GB.UTF-8 && 
+	multiqc -f -n %(outfile)s --no-data-dir star.dir/ 
     '''
     P.run(statement)
 
 
 @transform(star_mapping,
            regex("(.+).dir/(.+).Aligned.sortedByCoord.out.bam"),
-           r"counts.dir/\2_counts.txt")
+           r"counts.dir/\2_counts.tsv")
 def featureCounts(infile, outfile):
     """running featureCounts on mapped reads"""
     job_memory = "4G"
     job_threads = 4
-    anno = PARAMS["feacturecouts_gtf_gff"]
-    more_params = PARAMS["featurecouts_options"]
+    anno = PARAMS["featurecounts_gtf"]
+    more_params = PARAMS["featurecounts_options"]
     #theinfile = str(infile)+""
     '''featureCounts'''
     statement="""
     featureCounts -a %(anno)s
-    -T 4
+    -T %(job_threads)s
+    -t miRNA
     %(more_params)s
     -o %(outfile)s %(infile)s
     """
@@ -89,15 +90,15 @@ def featureCounts(infile, outfile):
 
 
 @collate(featureCounts,
-         regex("(counts.dir)/(.+).txt"),
+         regex("(counts.dir)/(.+).tsv"),
          r"\1/multiqc_report.html")
 def multiQCfc(infile, outfile):
     """Run multiqc on star mapping"""
     job_memory = "2G"
     statement = '''
-    "export LANG=en_GB.UTF-8 && "
-    "export LC_ALL=en_GB.UTF-8 && "
-	"multiqc -f -n %(outfile)s --no-data-dir counts.dir/ "
+    export LANG=en_GB.UTF-8 && 
+    export LC_ALL=en_GB.UTF-8 && 
+	multiqc -f -n %(outfile)s --no-data-dir counts.dir/ 
     '''
     P.run(statement)
 

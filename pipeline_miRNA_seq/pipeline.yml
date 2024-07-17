@@ -24,5 +24,5 @@ star:
 
 ###featureCounts options###
 featurecounts:
-  gtf_gff: $SCRATCH/public/annotations/hg38_noalt_ensembl93/mirbase.dir/miRNA_non_primary_transcripts_featureCounts.gtf
+  gtf: $SCRATCH/public/annotations/mm_GRCm39_ensembl111/mirbase.dir/miRNA_non_primary_transcripts.gtf.gz
   options: -O  --fracOverlap 0.8
